@@ -1,0 +1,181 @@
+.intro-overlay {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(88, 224, 255, 0.2), transparent 40%),
+    radial-gradient(circle at 80% 35%, rgba(124, 116, 255, 0.2), transparent 42%),
+    radial-gradient(circle at 55% 78%, rgba(20, 232, 198, 0.18), transparent 45%),
+    linear-gradient(150deg, #04060f 0%, #050a1a 45%, #02030a 100%);
+  z-index: 4000;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.intro-overlay.is-exit {
+  opacity: 0;
+  transform: scale(1.06);
+  pointer-events: none;
+}
+
+.intro-hud {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(88, 224, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(88, 224, 255, 0.08) 1px, transparent 1px),
+    radial-gradient(circle at center, rgba(88, 224, 255, 0.14), transparent 55%);
+  background-size: 70px 70px, 70px 70px, 100% 100%;
+  opacity: 0.25;
+  animation: hud-drift 16s linear infinite;
+}
+
+.intro-globe {
+  width: min(70vw, 640px);
+  aspect-ratio: 1;
+  position: relative;
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) scale(var(--globe-scale, 1));
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 0 45px rgba(88, 224, 255, 0.45));
+}
+
+.intro-globe::before {
+  content: '';
+  position: absolute;
+  inset: -12%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(88, 224, 255, 0.3), transparent 70%);
+  opacity: 0.65;
+}
+
+.globe-core {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 30% 32%, rgba(146, 255, 255, 0.6), rgba(12, 24, 44, 0.92) 52%, rgba(4, 10, 24, 0.98) 70%),
+    radial-gradient(circle at 65% 65%, rgba(88, 224, 255, 0.3), transparent 55%);
+  box-shadow:
+    inset 0 0 60px rgba(3, 8, 24, 0.9),
+    0 0 80px rgba(88, 224, 255, 0.35);
+}
+
+.globe-core::after {
+  content: '';
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  border: 1px solid rgba(120, 220, 255, 0.32);
+  box-shadow: inset 0 0 18px rgba(88, 224, 255, 0.25);
+}
+
+.globe-texture {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-image: radial-gradient(rgba(106, 255, 255, 0.9) 1px, transparent 2px);
+  background-size: 7px 7px;
+  mix-blend-mode: screen;
+  opacity: 0.55;
+  animation: globe-drift 6s linear infinite;
+  -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 60%, transparent 72%);
+  mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 60%, transparent 72%);
+}
+
+.globe-scan {
+  position: absolute;
+  inset: -20%;
+  background: linear-gradient(120deg, transparent 30%, rgba(88, 224, 255, 0.22) 45%, transparent 60%);
+  animation: globe-scan 3.2s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+
+.globe-orbit {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgba(88, 224, 255, 0.4);
+  opacity: 0.7;
+  animation: orbit-spin 10s linear infinite;
+}
+
+.orbit-one {
+  width: 115%;
+  height: 115%;
+  animation-duration: 10s;
+}
+
+.orbit-two {
+  width: 145%;
+  height: 145%;
+  border-style: solid;
+  opacity: 0.35;
+  animation-duration: 14s;
+}
+
+.orbit-three {
+  width: 175%;
+  height: 175%;
+  opacity: 0.2;
+  animation-duration: 18s;
+}
+
+
+.intro-overlay.is-exit {
+  --globe-scale: 1.28;
+}
+
+.intro-overlay.is-exit .globe-core {
+  box-shadow:
+    inset 0 0 70px rgba(3, 8, 24, 0.9),
+    0 0 110px rgba(88, 224, 255, 0.65);
+}
+
+@keyframes globe-drift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 140px 0;
+  }
+}
+
+@keyframes globe-scan {
+  0%, 100% {
+    transform: translateY(-10%);
+  }
+  50% {
+    transform: translateY(12%);
+  }
+}
+
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hud-drift {
+  to {
+    transform: translate3d(-40px, 30px, 0);
+  }
+}
+
+@media (max-width: 768px) {
+  .intro-globe {
+    width: min(88vw, 420px);
+  }
+}

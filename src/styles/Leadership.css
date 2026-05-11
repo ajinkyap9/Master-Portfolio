@@ -1,0 +1,146 @@
+.leadership {
+  padding: 6rem 2rem;
+  background: linear-gradient(180deg, #050816 0%, #071226 100%);
+  /* ensure browser scroll places section below fixed navbar */
+  scroll-margin-top: 100px;
+}
+
+.section-anchor {
+  display: block;
+  position: relative;
+  top: -80px;
+  height: 0;
+  width: 0;
+}
+
+.leadership-carousel {
+  margin-top: 2rem;
+  border-radius: 26px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: rgba(6, 10, 24, 0.35);
+  padding: 2rem 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.45);
+  position: relative;
+  isolation: isolate;
+}
+
+.leadership-carousel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 26px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(88, 224, 255, 0.5), rgba(120, 82, 255, 0.35), rgba(88, 224, 255, 0.5));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.55;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.leadership-carousel::after {
+  content: '';
+  position: absolute;
+  inset: -18px;
+  border-radius: 32px;
+  background: radial-gradient(circle at 30% 20%, rgba(88, 224, 255, 0.2), transparent 55%),
+    radial-gradient(circle at 70% 80%, rgba(120, 82, 255, 0.18), transparent 60%);
+  opacity: 0.15;
+  filter: blur(10px);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.leadership-carousel:hover::before {
+  opacity: 0.95;
+}
+
+.leadership-carousel:hover::after {
+  opacity: 0.35;
+}
+
+.leadership-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: leadershipScroll 22s linear infinite;
+  will-change: transform;
+}
+
+.leadership-carousel:hover .leadership-track {
+  animation-play-state: paused;
+}
+
+@keyframes leadershipScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.leadership-card {
+  background: rgba(15, 23, 42, 0.25);
+  border-radius: 12px;
+  padding: 2.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  backdrop-filter: blur(15px);
+  min-width: 360px;
+  min-height: 220px;
+  flex-shrink: 0;
+}
+
+.leadership-card:hover {
+  background: rgba(15, 23, 42, 0.35);
+  border-color: rgba(88, 224, 255, 0.3);
+  box-shadow: 0 12px 48px rgba(88, 224, 255, 0.2);
+}
+
+.leadership-card h3 {
+  color: #f7fbff;
+  font-size: 1.3rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.leadership-org {
+  color: #7cecff;
+  font-weight: 600;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.leadership-impact {
+  color: #9aa8c7;
+  margin: 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .leadership {
+    padding: 4rem 1rem;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+  }
+
+  .leadership-carousel {
+    padding: 1.5rem 1rem;
+  }
+
+  .leadership-card {
+    min-width: 300px;
+    padding: 2rem;
+  }
+}

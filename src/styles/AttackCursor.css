@@ -1,0 +1,65 @@
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+}
+
+.attack-cursor {
+  --cursor-x: -9999px;
+  --cursor-y: -9999px;
+  --cursor-scale: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(120, 220, 255, 0.7);
+  transform: translate3d(var(--cursor-x), var(--cursor-y), 0) scale(var(--cursor-scale));
+  pointer-events: none;
+  z-index: 2000;
+  mix-blend-mode: screen;
+  box-shadow:
+    0 0 10px rgba(88, 224, 255, 0.35),
+    inset 0 0 8px rgba(88, 224, 255, 0.2);
+  background:
+    linear-gradient(90deg, transparent 46%, rgba(88, 224, 255, 0.25) 46%, rgba(88, 224, 255, 0.25) 54%, transparent 54%),
+    linear-gradient(0deg, transparent 46%, rgba(88, 224, 255, 0.25) 46%, rgba(88, 224, 255, 0.25) 54%, transparent 54%);
+}
+
+.attack-cursor::before {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(88, 224, 255, 0.95) 0 35%, rgba(88, 224, 255, 0.2) 36% 60%, transparent 61%);
+  box-shadow: 0 0 12px rgba(88, 224, 255, 0.5);
+}
+
+.attack-cursor::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px dashed rgba(88, 224, 255, 0.4);
+  animation: attack-spin 6s linear infinite;
+}
+
+.attack-cursor.is-down {
+  --cursor-scale: 0.75;
+  box-shadow:
+    0 0 14px rgba(88, 224, 255, 0.5),
+    inset 0 0 12px rgba(88, 224, 255, 0.35);
+}
+
+@keyframes attack-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (pointer: coarse) {
+  .attack-cursor {
+    display: none;
+  }
+}

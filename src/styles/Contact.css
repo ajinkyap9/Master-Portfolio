@@ -1,0 +1,130 @@
+.contact {
+  padding: 6rem 2rem;
+  background: linear-gradient(180deg, #071226 0%, #03040a 100%);
+}
+
+.contact-content {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.contact-info h3 {
+  font-size: 2rem;
+  color: #edf3ff;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.contact-info {
+  max-width: 700px;
+  text-align: left;
+}
+
+.contact-info > p {
+  color: #9aa8c7;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.25);
+  backdrop-filter: blur(15px);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.contact-item:hover {
+  background: rgba(15, 23, 42, 0.35);
+  border-color: rgba(88, 224, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(88, 224, 255, 0.2);
+}
+
+.contact-icon {
+  font-size: 1.8rem;
+  color: #7cecff;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.contact-item h4 {
+  font-size: 1.1rem;
+  color: #f7fbff;
+  margin: 0 0 0.3rem 0;
+  font-weight: 700;
+}
+
+.contact-item p {
+  color: #9aa8c7;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-links a {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.25);
+  border-radius: 50%;
+  color: #7cecff;
+  font-size: 1.3rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  backdrop-filter: blur(15px);
+}
+
+.social-links a:hover {
+  background: linear-gradient(135deg, #58e0ff 0%, #6a7dff 100%);
+  color: #03101d;
+  box-shadow: 0 12px 48px rgba(88, 224, 255, 0.3);
+  border-color: rgba(88, 224, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+  .contact {
+    padding: 4rem 1rem;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+  }
+
+  .contact-content {
+    gap: 2rem;
+  }
+
+  .contact-item {
+    gap: 1rem;
+  }
+
+  .social-links {
+    gap: 0.5rem;
+  }
+
+  .social-links a {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+}

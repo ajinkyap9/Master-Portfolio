@@ -12,6 +12,32 @@
     linear-gradient(160deg, #050816 0%, #071226 50%, #03040a 100%);
   margin-top: 60px;
   color: #edf3ff;
+  --pointer-x: 50vw;
+  --pointer-y: 50vh;
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero::before {
+  z-index: 1;
+  background:
+    linear-gradient(rgba(124, 236, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 209, 102, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.72), transparent 72%);
+  animation: grid-drift 18s linear infinite;
+}
+
+.hero::after {
+  z-index: 2;
+  background: radial-gradient(circle 220px at var(--pointer-x) var(--pointer-y), rgba(124, 236, 255, 0.18), transparent 72%);
+  mix-blend-mode: screen;
 }
 
 .hero-background {
@@ -29,6 +55,66 @@
   inset: -8%;
   z-index: 2;
   pointer-events: none;
+}
+
+.signal-matrix {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.signal-matrix span {
+  position: absolute;
+  top: -20%;
+  width: 1px;
+  height: 36%;
+  background: linear-gradient(180deg, transparent, rgba(255, 209, 102, 0.72), rgba(124, 236, 255, 0.12), transparent);
+  box-shadow: 0 0 22px rgba(255, 209, 102, 0.32);
+  opacity: 0.42;
+  animation: signal-drop 6s linear infinite;
+}
+
+.signal-matrix span:nth-child(1) {
+  left: 9%;
+  animation-delay: -0.4s;
+}
+
+.signal-matrix span:nth-child(2) {
+  left: 22%;
+  animation-delay: -2.1s;
+  animation-duration: 7.4s;
+}
+
+.signal-matrix span:nth-child(3) {
+  left: 37%;
+  animation-delay: -1.3s;
+  animation-duration: 5.6s;
+}
+
+.signal-matrix span:nth-child(4) {
+  left: 53%;
+  animation-delay: -3.2s;
+  animation-duration: 8s;
+}
+
+.signal-matrix span:nth-child(5) {
+  left: 68%;
+  animation-delay: -2.8s;
+  animation-duration: 6.8s;
+}
+
+.signal-matrix span:nth-child(6) {
+  left: 81%;
+  animation-delay: -1.7s;
+  animation-duration: 7.8s;
+}
+
+.signal-matrix span:nth-child(7) {
+  left: 94%;
+  animation-delay: -4.1s;
+  animation-duration: 6.2s;
 }
 
 .tech-orb {
@@ -95,6 +181,24 @@
   }
   50% {
     transform: translateY(30px);
+  }
+}
+
+@keyframes grid-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 72px 72px;
+  }
+}
+
+@keyframes signal-drop {
+  from {
+    transform: translate3d(0, -30vh, 0) rotate(12deg);
+  }
+  to {
+    transform: translate3d(0, 150vh, 0) rotate(12deg);
   }
 }
 

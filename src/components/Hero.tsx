@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   FaArrowDown,
@@ -52,6 +52,40 @@ const techIconSet: { Icon: IconType; label: string }[] = [
   { Icon: FaDatabase, label: 'Database' },
 ];
 
+const seededRandom = (seed: number) => {
+  const value = Math.sin(seed) * 10000;
+  return value - Math.floor(value);
+};
+
+const floatingIcons = techIconSet.map((item, index) => {
+  const seed = index + 1;
+  const size = 16 + seededRandom(seed * 2) * 12;
+  const left = seededRandom(seed * 3) * 100;
+  const top = seededRandom(seed * 5) * 100;
+  const driftX1 = (seededRandom(seed * 7) - 0.5) * 180;
+  const driftY1 = (seededRandom(seed * 11) - 0.5) * 180;
+  const driftX2 = (seededRandom(seed * 13) - 0.5) * 200;
+  const driftY2 = (seededRandom(seed * 17) - 0.5) * 200;
+  const duration = 10 + seededRandom(seed * 19) * 8;
+  const delay = seededRandom(seed * 23) * 2;
+  const spin = (seededRandom(seed * 29) - 0.5) * 120;
+
+  return {
+    ...item,
+    id: `${item.label}-${index}`,
+    size,
+    left,
+    top,
+    driftX1,
+    driftY1,
+    driftX2,
+    driftY2,
+    duration,
+    delay,
+    spin,
+  };
+});
+
 export const Hero = () => {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -77,38 +111,6 @@ export const Hero = () => {
   const iconRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const pointerRef = useRef({ x: 0, y: 0, isDown: false });
   const frameRef = useRef<number | null>(null);
-
-  const floatingIcons = useMemo(
-    () =>
-      techIconSet.map((item, index) => {
-        const size = 16 + Math.random() * 12;
-        const left = Math.random() * 100;
-        const top = Math.random() * 100;
-        const driftX1 = (Math.random() - 0.5) * 180;
-        const driftY1 = (Math.random() - 0.5) * 180;
-        const driftX2 = (Math.random() - 0.5) * 200;
-        const driftY2 = (Math.random() - 0.5) * 200;
-        const duration = 10 + Math.random() * 8;
-        const delay = Math.random() * 2;
-        const spin = (Math.random() - 0.5) * 120;
-
-        return {
-          ...item,
-          id: `${item.label}-${index}`,
-          size,
-          left,
-          top,
-          driftX1,
-          driftY1,
-          driftX2,
-          driftY2,
-          duration,
-          delay,
-          spin,
-        };
-      }),
-    [],
-  );
 
   useEffect(() => {
     const heroElement = heroRef.current;
@@ -158,6 +160,8 @@ export const Hero = () => {
     const handlePointerMove = (event: PointerEvent) => {
       pointerRef.current.x = event.clientX;
       pointerRef.current.y = event.clientY;
+      heroElement.style.setProperty('--pointer-x', `${event.clientX}px`);
+      heroElement.style.setProperty('--pointer-y', `${event.clientY}px`);
       scheduleUpdate();
     };
 
@@ -233,6 +237,12 @@ export const Hero = () => {
                 <item.Icon />
               </span>
             </motion.div>
+          ))}
+        </div>
+
+        <div className="signal-matrix" aria-hidden="true">
+          {Array.from({ length: 7 }).map((_, index) => (
+            <span key={index} />
           ))}
         </div>
       </div>

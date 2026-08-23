@@ -47,7 +47,7 @@ export const projects = [
     tags: ["SOAR", "Python", "FastAPI", "SecOps"],
     image: sentinelXImg,
     link: "#",
-    github: "https://github.com/ajinkyap9/SentinelX"
+    github: "https://github.com/ajinkyap9/SentinalX"
   },
   {
     id: 2,
